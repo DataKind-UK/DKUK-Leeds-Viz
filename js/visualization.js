@@ -89,7 +89,7 @@ $(document).ready(function() {
 function init(){
   resizeContainer($("#content").parent().width());
   drawChoropleth();
-  drawChart();
+  //drawChart();
 
   //====EVENT LISTENERS===//
 

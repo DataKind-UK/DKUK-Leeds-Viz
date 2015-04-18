@@ -750,7 +750,7 @@ function displayPopBox(d) {
   var $popbox = $("#pop-info"),
       highlighted = all_data[d.properties.gis_id];
 
-  d3.select(".neighborhood").html(highlighted.NBH_NAMES);
+  d3.select(".neighborhood").html(highlighted.lsoa_name);
 
   var val, key, typeDef;
   $.each($popbox.find("tr"), function(k, row){

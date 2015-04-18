@@ -835,7 +835,7 @@ function hoverNeighborhood(d) {
 
     if (activeData !== "no_neighborhood_data") {
       setVisMetric(activeData, all_data[activeId][activeData]);
-      updateChart(all_data[activeId]);
+      //updateChart(all_data[activeId]);
     } else {
       setVisMetric(null, null, true);
     }

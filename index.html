@@ -66,7 +66,7 @@
       <li><a id="no_neighborhood_data" href="#"><button type="button" class="btn btn-danger btn-sm" style="width:100%"><span class="glyphicon glyphicon-trash"></span> Clear selection</button></a></li>
     </ul>
     <h4>Centre data</h4>
-    <ul class="nav nav-pills nav-stacked school-type-menu">
+    <ul class="nav nav-pills nav-stacked marker-type-menu">
       <li><a id="jobcentres" href="#">Job Centres</a></li>
     </ul>
     <h4>Financial exclusion data</h4>
@@ -154,32 +154,32 @@
       <div class="chart"></div>
     </div>
   </div> <!-- narrative cards here -->
-  <div id="schools_panel" class="panel panel-default hide">
+  <div id="markers_panel" class="panel panel-default hide">
     <button class="btn-danger btn-xs btn-panel-close" id="btnPanelClose">X Close</button>
     <div class="panel-body">
-        <div class="hide" id="school_data">
-            <h4 class="school-name"></h4>
+        <div class="hide" id="marker_data">
+            <h4 class="marker-name"></h4>
             <table class="table table-hover">
                 <tbody>
                 <tr>
                     <td>Enrollment</td>
-                    <td class="school-enrollment">getDisplayValue(school.enroll_val, 'enroll_val')</td>
+                    <td class="marker-enrollment">getDisplayValue(marker.enroll_val, 'enroll_val')</td>
                 </tr>
                 <tr>
                     <td>Allocation</td>
-                    <td class="school-allocation">getDisplayValue(school.alloc_cur, 'alloc_cur')</td>
+                    <td class="marker-allocation">getDisplayValue(marker.alloc_cur, 'alloc_cur')</td>
                 </tr>
                 <tr>
                     <td>Percent proficient at math</td>
-                    <td class="school-math">getDisplayValue(school.math_perc, 'math_perc')</td>
+                    <td class="marker-math">getDisplayValue(marker.math_perc, 'math_perc')</td>
                 </tr>
                 <tr>
                     <td>Percent proficient at reading</td>
-                    <td class="school-reading">getDisplayValue(school.reading_perc, 'reading_perc')</td>
+                    <td class="marker-reading">getDisplayValue(marker.reading_perc, 'reading_perc')</td>
                 </tr>
                 <tr>
                     <td>Graduation rate</td>
-                    <td class="school-grad">getDisplayValue(school.grad_perc, 'grad_perc')</td>
+                    <td class="marker-grad">getDisplayValue(marker.grad_perc, 'grad_perc')</td>
                 </tr>
                 </tbody>
             </table>
@@ -210,7 +210,7 @@
           </div>
           <div class="col-lg-12">
             <div class="two" style="position:relative;">
-              <h3>Select school points for data</h3>
+              <h3>Select marker points for data</h3>
             </div>
           </div>
           <div class="col-lg-12">

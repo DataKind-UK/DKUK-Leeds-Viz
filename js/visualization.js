@@ -3,7 +3,7 @@ var COUNT_SCHOOL_DISPLAY = 3;
 var centered;
 
 var svg, projection, gmapProjection, path, g, gmap;
-var school_scale, school_data, activeId, choropleth_data, source_data;
+var marker_scale, marker_data, activeId, choropleth_data, source_data;
 var all_data = {}, activeData = "population_total";
 var min_population = 100;
 var defaultColor = "#aaa";
@@ -18,7 +18,7 @@ var color = d3.scale.category20();
 var dotRadius = 4;
 
 var currentMetric = null;
-var schoolType = "clear";
+var markerType = "clear";
 var highlightedNeighborhood = null;
 
 var gmap_style=[
@@ -110,27 +110,27 @@ function init(){
     }
   });
 
-  // school type changes
-  $(".school-type-menu > li").on("click", "a", function(e){
+  // marker type changes
+  $(".marker-type-menu > li").on("click", "a", function(e){
     e.preventDefault();
 
     //$(this).parent().addClass("selected").siblings().removeClass("selected");
 
     var $$parent = $(this).parent();
     if ($$parent.hasClass("selected")) {
-      removeSchools($(this).attr("id"));
+      removeMarkers($(this).attr("id"));
     } else {
-      drawSchools($(this).attr("id"));
+      drawMarkers($(this).attr("id"));
     }
     $$parent.toggleClass("selected");
 
   });
 
   // circle changes
-  $(".school-menu > li").on("click", "a", function(e){
+  $(".marker-menu > li").on("click", "a", function(e){
     e.preventDefault();
-    var value = $(this).attr("id") === "no_school_data" ? 4 : $(this).attr("id");
-    changeSchoolData(value);
+    var value = $(this).attr("id") === "no_marker_data" ? 4 : $(this).attr("id");
+    changeMarkerData(value);
     $(this).parent().addClass("selected").siblings().removeClass("selected");
   });
 
@@ -258,7 +258,7 @@ function drawChoropleth(){
 
       g = svg.append("g");
       var neighborhoods = g.append("g").attr("id", "neighborhoods");
-      g.append("g").attr("id", "schools");
+      g.append("g").attr("id", "markers");
       d3.select("#legend-container").append("svg")
           .attr("height", 200)
         .append("g")
@@ -295,14 +295,14 @@ function drawChoropleth(){
           })
           .style("fill-opacity",0.75);
 
-        g.select("#schools").selectAll("circle").remove();
+        g.select("#markers").selectAll("circle").remove();
 
         //if there is a highlighted neighborhood then rehighlightit.
         if(highlightedNeighborhood) {
           highlightNeigborhood(highlightedNeighborhood, true);
         }
 
-        redrawSchools();
+        redrawMarkers();
       };
     };
 
@@ -348,7 +348,7 @@ function changeNeighborhoodData(new_data_column) {
     setVisMetric(new_data_column, all_data[activeId][new_data_column]);
   } else {
     setVisMetric(null, null, true);
-    removeSchools("clear");
+    removeMarkers("clear");
     $(".selected").removeClass("selected");
     $("#details p.lead").hide();
     $("#legend-panel").hide();
@@ -422,18 +422,18 @@ function changeNeighborhoodData(new_data_column) {
 
 }
 
-function redrawSchools() {
+function redrawMarkers() {
   if($("#public").parent().hasClass("selected")) {
-    drawSchools("public");
+    drawMarkers("public");
   }
 
   if($("#jobcentres").parent().hasClass("selected")) {
-    drawSchools("jobcentres");
+    drawMarkers("jobcentres");
   }
 }
 
-function drawSchools(type){
-  schoolType=type;
+function drawMarkers(type){
+  markerType=type;
 
   var packer = sm.packer(),
       file = "",
@@ -455,111 +455,111 @@ function drawSchools(type){
         "clear": []
       };
     }
-    school_data = data[prop];
-    school_scale = d3.scale.sqrt().range([1,10]);
-    var circle = g.select("#schools").selectAll("circle").data(data[prop], function(d) {
+    marker_data = data[prop];
+    marker_scale = d3.scale.sqrt().range([1,10]);
+    var circle = g.select("#markers").selectAll("circle").data(data[prop], function(d) {
       return d.name;
     });
     var circleEnter = circle.enter().append("circle")
-    .attr("class", "school " + type)
+    .attr("class", "marker " + type)
     .attr("r", 4)
     .attr("transform", function(d) {
       return "translate(" + gmapProjection([d.long, d.lat]) + ")";})
     .append("title").text(function(d){return d.name;});
 
-    circle.on("click", displaySchoolData);
+    circle.on("click", displayMarkerData);
     packMetros();
 
 
-    function displaySchoolData(school) {
-      var $schools = $("#schools_panel");
-      var $panelBody = $schools.find(".panel-body");
-      var $schoolData = $panelBody.children(".school-data");
+    function displayMarkerData(marker) {
+      var $markers = $("#markers_panel");
+      var $panelBody = $markers.find(".panel-body");
+      var $markerData = $panelBody.children(".marker-data");
 
-      //Don"t add the school twice.
-      for (var i = 0, len = $schoolData.length; i < len; i++) {
-          if(school.name === $($schoolData[i]).find(".school-name").text()) { return; }
+      //Don"t add the marker twice.
+      for (var i = 0, len = $markerData.length; i < len; i++) {
+          if(marker.name === $($markerData[i]).find(".marker-name").text()) { return; }
       }
 
-      //Show panel on first school click.
-      if ($schools.hasClass("hide")) {
+      //Show panel on first marker click.
+      if ($markers.hasClass("hide")) {
         $("#btnPanelClose").on("click", closePanel);
-        $schools.toggleClass("hide");
+        $markers.toggleClass("hide");
       }
 
-      //Limit number of displayed schools.
-      if ($schoolData.length === COUNT_SCHOOL_DISPLAY) {
+      //Limit number of displayed markers.
+      if ($markerData.length === COUNT_SCHOOL_DISPLAY) {
         $panelBody.children(":nth-child(" + COUNT_SCHOOL_DISPLAY + ")").remove();
       }
 
-      //Add a new school to the display.
-      var $schoolDisplay = $panelBody.find("#school_data").clone();
-      $panelBody.prepend(buildNewSchool($schoolDisplay, school));
+      //Add a new marker to the display.
+      var $markerDisplay = $panelBody.find("#marker_data").clone();
+      $panelBody.prepend(buildNewMarker($markerDisplay, marker));
     }
 
-    function buildNewSchool($schoolDisplay, school) {
-      $schoolDisplay.removeAttr("id").removeAttr("class").addClass("school-data");
+    function buildNewMarker($markerDisplay, marker) {
+      $markerDisplay.removeAttr("id").removeAttr("class").addClass("marker-data");
 
-      var $schoolName = $schoolDisplay.find(".school-name");
-      $schoolName.html(school.name);
-      $schoolName.on("click", function() {
-        $schoolDisplay.remove();
+      var $markerName = $markerDisplay.find(".marker-name");
+      $markerName.html(marker.name);
+      $markerName.on("click", function() {
+        $markerDisplay.remove();
         setPanel();
       });
-      $schoolDisplay.find(".school-enrollment").html(getDisplayValue(school.enroll_val, "enroll_val", "val"));
-      $schoolDisplay.find(".school-allocation").html(getDisplayValue(school.alloc_cur, "alloc_cur", "cur"));
-      $schoolDisplay.find(".school-math").html(getDisplayValue(school.math_perc, "math_perc", "perc"));
-      $schoolDisplay.find(".school-reading").html(getDisplayValue(school.reading_perc, "reading_perc", "perc"));
-      $schoolDisplay.find(".school-grad").html(getDisplayValue(school.grad_perc, "grad_perc", "perc"));
-      return $schoolDisplay;
+      $markerDisplay.find(".marker-enrollment").html(getDisplayValue(marker.enroll_val, "enroll_val", "val"));
+      $markerDisplay.find(".marker-allocation").html(getDisplayValue(marker.alloc_cur, "alloc_cur", "cur"));
+      $markerDisplay.find(".marker-math").html(getDisplayValue(marker.math_perc, "math_perc", "perc"));
+      $markerDisplay.find(".marker-reading").html(getDisplayValue(marker.reading_perc, "reading_perc", "perc"));
+      $markerDisplay.find(".marker-grad").html(getDisplayValue(marker.grad_perc, "grad_perc", "perc"));
+      return $markerDisplay;
     }
 
     // Close button click handler.
     function closePanel(event) {
       event.preventDefault();
       $("#btnPanelClose").off("click", closePanel);
-      $(".school-data").remove();
-      $("#schools_panel").addClass("hide");
+      $(".marker-data").remove();
+      $("#markers_panel").addClass("hide");
     }
 
     function setPanel() {
-      var $schools = $("#schools_panel");
-      var $panelBody = $schools.find(".panel-body");
-      if ($panelBody.children(".school-data").length === 0) {
-        $schools.addClass("hide");
+      var $markers = $("#markers_panel");
+      var $panelBody = $markers.find(".panel-body");
+      if ($panelBody.children(".marker-data").length === 0) {
+        $markers.addClass("hide");
       }
     }
   });
 
   function packMetros() {
-    var elements = d3.selectAll("#schools circle")[0];
+    var elements = d3.selectAll("#markers circle")[0];
     packer.elements(elements).start();
   }
 }
 
-function removeSchools(type) {
+function removeMarkers(type) {
   if (type == "clear") {
-    g.select("#schools").selectAll("circle").remove();
+    g.select("#markers").selectAll("circle").remove();
   } else {
-    g.select("#schools").selectAll("circle." + type).remove();
+    g.select("#markers").selectAll("circle." + type).remove();
   }
 }
 
 
-function changeSchoolData(new_data_column) {
+function changeMarkerData(new_data_column) {
   if (typeof new_data_column === "string"){
-    matchScaleToData(school_scale, function(d){return +d[new_data_column];});
+    matchScaleToData(marker_scale, function(d){return +d[new_data_column];});
   }
-  g.select("#schools").selectAll("circle")
+  g.select("#markers").selectAll("circle")
     .transition().duration(600)
     .attr("r", function(d) {
-      return typeof new_data_column !== "string" ? 4 : school_scale(d[new_data_column]);
+      return typeof new_data_column !== "string" ? 4 : marker_scale(d[new_data_column]);
     });
 }
 
 function matchScaleToData(scale, fieldFunction) {
-  var minimum = d3.min(school_data, fieldFunction),
-      maximum = d3.max(school_data, fieldFunction);
+  var minimum = d3.min(marker_data, fieldFunction),
+      maximum = d3.max(marker_data, fieldFunction);
   scale.domain([minimum, maximum]);
 }
 

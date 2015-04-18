@@ -124,7 +124,7 @@ path.nbhd.active {
   stroke: #077CA8;
   stroke-width: 2px;
 }
-circle.school {
+circle.marker {
   cursor: pointer;
   fill-opacity: 0.5;
   /*fill: #000099;*/
@@ -138,7 +138,7 @@ circle.public {
   fill: #009;
 }
 
-circle.school:hover {
+circle.marker:hover {
   fill-opacity: 1;
 }
 
@@ -256,7 +256,7 @@ circle.school:hover {
   margin-bottom: 10px;
 }
 
-#schools_panel {
+#markers_panel {
   position:absolute;
   width:300px;
   top:20px;
@@ -313,11 +313,11 @@ div#legend-panel {
 .stepFive { background: #6eb43f;}
 
 
-h4.school-name {
+h4.marker-name {
   cursor: pointer;
 }
 
-h4.school-name:after {
+h4.marker-name:after {
   content: "Click name to remove";
   font-size: 10px;
   color: #999;

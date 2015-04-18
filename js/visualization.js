@@ -427,8 +427,8 @@ function redrawSchools() {
     drawSchools("public");
   }
 
-  if($("#charter").parent().hasClass("selected")) {
-    drawSchools("charter");
+  if($("#jobcentres").parent().hasClass("selected")) {
+    drawSchools("jobcentres");
   }
 }
 
@@ -441,13 +441,9 @@ function drawSchools(type){
 
   //this could be cleaned up if we use a consistent naming convention.
   switch(type) {
-    case "public":
-      file = "data/schools.json";
-      prop = "schools";
-      break;
-    case "charter":
-      file = "data/charters.json";
-      prop = "charters";
+    case "jobcentres":
+      file = "data/jobcentres.json";
+      prop = "jobcentres";
       break;
   }
 

@@ -797,7 +797,7 @@ function highlightNeigborhood(d, isOverlayDraw) {
       //last neighborhood to display in popBox.
       activeId = d.properties.gis_id;
       setVisMetric(activeData, all_data[activeId][activeData]);
-      updateChart(all_data[activeId]);
+      //updateChart(all_data[activeId]);
     }
   } else {
     g.selectAll("#path" + highlightedNeighborhood.properties.NCID).classed("active", true);

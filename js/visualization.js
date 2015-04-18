@@ -176,7 +176,7 @@ function drawChoropleth(){
 
   queue()
     //.defer(d3.json, "data/neighborhoods44.json")
-    .defer(d3.csv, "data/geodata/leeds_lsoa.geojson")
+    .defer(d3.json, "data/geodata/leeds_lsoa.geojson")
     .defer(d3.csv, "data/test_data.csv")
     .defer(d3.csv, "data/source.csv")
     .await(setUpChoropleth);
@@ -194,7 +194,10 @@ function drawChoropleth(){
       zoom: 12,
       minZoom: 12,
       maxZoom: 14,
-      center: new google.maps.LatLng(38.89555, -77.01551),
+      //DC:
+      //center: new google.maps.LatLng(38.89555, -77.01551),
+      //Leeds, UK:
+      center: new google.maps.LatLng(53.806,-1.5357),  
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       streetViewControl: false,
       panControl: false,
@@ -212,8 +215,10 @@ function drawChoropleth(){
     });
 
     var maxBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(38.85,-77.10),
-      new google.maps.LatLng(38.97,-76.82)
+      //new google.maps.LatLng(38.85,-77.10),
+      //new google.maps.LatLng(38.97,-76.82)
+      new google.maps.LatLng(53.6,-1.65),
+      new google.maps.LatLng(53.9,-1.40)
     );
 
     // If a drag ends outside of our max bounds, bounce back to the default center.

@@ -19,7 +19,7 @@ def main():
     json_file.write('{"' + variable_name + '":')
     json_file.write(out)
     json_file.write('}')
-    
+
     csv_file.close()
     json_file.close()
 

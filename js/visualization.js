@@ -516,6 +516,8 @@ function drawMarkers(type){
         setPanel();
       });
       $markerDisplay.find(".marker-service").html(getDisplayValue(marker.primary_service, "primary_service", "val"));
+      $markerDisplay.find(".marker-building").html(getDisplayValue(marker.building, "building", "val"));
+      $markerDisplay.find(".marker-address").html(getDisplayValue(marker.address, "address", "val"));
       return $markerDisplay;
     }
 

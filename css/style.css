@@ -134,6 +134,11 @@ circle.jobcentres {
   fill: #900;
 }
 
+
+circle.mentalHealthOrgs {
+  fill: #f80;
+}
+
 circle.public {
   fill: #009;
 }

@@ -446,6 +446,11 @@ function drawMarkers(type){
       prop = "jobcentres";
       size_prop = "math_perc";
       break;
+    case "mentalHealthOrgs":
+      file = "data/mentalHealthOrgs.json";
+      prop = "mentalHealthOrgs";
+      size_prop = "";
+      break;
   }
 
     //switched this to read json.
@@ -471,9 +476,9 @@ function drawMarkers(type){
     circle.on("click", displayMarkerData);
     packMetros();
 
+    if (size_prop!=="") {
     changeMarkerData(size_prop);
-        
-
+    }
 
     function displayMarkerData(marker) {
       var $markers = $("#markers_panel");

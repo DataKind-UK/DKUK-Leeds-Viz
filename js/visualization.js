@@ -126,13 +126,13 @@ function init(){
 
   });
 
-  // circle changes
-  $(".marker-menu > li").on("click", "a", function(e){
-    e.preventDefault();
-    var value = $(this).attr("id") === "no_marker_data" ? 4 : $(this).attr("id");
-    changeMarkerData(value);
-    $(this).parent().addClass("selected").siblings().removeClass("selected");
-  });
+//  // circle changes
+//  $(".marker-type-menu > li").on("click", "a", function(e){
+//    e.preventDefault();
+//    var value = $(this).attr("id") === "no_marker_data" ? 4 : "math_perc"; //$(this).attr("id");
+//    changeMarkerData(value);
+//    $(this).parent().addClass("selected").siblings().removeClass("selected");
+//  });
 
   // narrative
   $("#narrative-row button").click(function() {
@@ -444,6 +444,7 @@ function drawMarkers(type){
     case "jobcentres":
       file = "data/jobcentres.json";
       prop = "jobcentres";
+      size_prop = "math_perc";
       break;
   }
 
@@ -456,7 +457,7 @@ function drawMarkers(type){
       };
     }
     marker_data = data[prop];
-    marker_scale = d3.scale.sqrt().range([1,10]);
+    marker_scale = d3.scale.sqrt().range([4,15]);        
     var circle = g.select("#markers").selectAll("circle").data(data[prop], function(d) {
       return d.name;
     });
@@ -469,6 +470,9 @@ function drawMarkers(type){
 
     circle.on("click", displayMarkerData);
     packMetros();
+
+    changeMarkerData(size_prop);
+        
 
 
     function displayMarkerData(marker) {

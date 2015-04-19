@@ -139,6 +139,14 @@ circle.mentalHealthOrgs {
   fill: #f80;
 }
 
+circle.highStBanks {
+  fill: #f0f;
+}
+
+circle.subprimeLenders {
+  fill: #ff0;
+}
+
 circle.public {
   fill: #009;
 }

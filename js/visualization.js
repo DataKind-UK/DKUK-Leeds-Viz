@@ -451,6 +451,16 @@ function drawMarkers(type){
       prop = "mentalHealthOrgs";
       size_prop = "";
       break;
+    case "highStBanks":
+      file = "data/highStBanks.json";
+      prop = "highStBanks";
+      size_prop = "";
+      break;
+    case "subprimeLenders":
+      file = "data/subprimeLenders.json";
+      prop = "subprimeLenders";
+      size_prop = "";
+      break;
   }
 
     //switched this to read json.

@@ -515,11 +515,7 @@ function drawMarkers(type){
         $markerDisplay.remove();
         setPanel();
       });
-      $markerDisplay.find(".marker-enrollment").html(getDisplayValue(marker.enroll_val, "enroll_val", "val"));
-      $markerDisplay.find(".marker-allocation").html(getDisplayValue(marker.alloc_cur, "alloc_cur", "cur"));
-      $markerDisplay.find(".marker-math").html(getDisplayValue(marker.math_perc, "math_perc", "perc"));
-      $markerDisplay.find(".marker-reading").html(getDisplayValue(marker.reading_perc, "reading_perc", "perc"));
-      $markerDisplay.find(".marker-grad").html(getDisplayValue(marker.grad_perc, "grad_perc", "perc"));
+      $markerDisplay.find(".marker-service").html(getDisplayValue(marker.primary_service, "primary_service", "val"));
       return $markerDisplay;
     }
 

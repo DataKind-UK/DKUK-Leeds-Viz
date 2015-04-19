@@ -11,7 +11,7 @@ def main():
     variable_name = tokens[len(tokens) - 1]
     variable_name = variable_name[:-4]
 
-    csv_file = open(csv_filename, 'r')
+    csv_file = open(csv_filename, 'rU')
     json_file = open(json_filename, 'w')
 
     reader = csv.DictReader(csv_file)

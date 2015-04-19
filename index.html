@@ -80,9 +80,18 @@ Search for "cpdatachange" change the column name and text as bellow
       <li><a id="jobcentres" href="#">Job Centres</a></li>
       <li><a id="mentalHealthOrgs" href="#">Mental Health Organisations</a></li>
     </ul>
-    <h4>Financial exclusion data</h4>
+    <h4>General</h4>
     <ul class="nav nav-pills nav-stacked neighborhood-menu">
-      <li class="nav-header disabled"><a>LSOA Demographics</a></li>
+        <li class="nav-header disabled"><a>Demographics</a></li>
+        <li><a id="pop" href="#">Total population</a></li>
+        <li><a id="per_males" href="#">Percentage men</a></li>
+        <li><a id="per_fem" href="#">Percentage women</a></li>
+        <li><a id="per_0_19" href="#">Percentage under 20</a></li>
+        <li><a id="per_20_64" href="#">Percentage 20-64</a></li>
+        <li><a id="per_65_plus" href="#">Percentage 65 or over</a></li>
+        <li><a id="ods" href="#">Overall index of deprivation</a></li>
+        <h4>Financial exclusion data</h4>
+        <li class="nav-header disabled"><a>LSOA Demographics</a></li>
         <li><a id="per_sp_rec_pc" href="#">% state pensioners receiving pension credit</a></li>
         <li><a id="esa_mh" href="#">ESA claimants with mental health problems</a></li>
         <li><a id="jsa" href="#">Job Seekers Allowance</a></li>
@@ -98,7 +107,12 @@ Search for "cpdatachange" change the column name and text as bellow
         <li><a id="san18_24" href="#">Sanctions 18-24 years old</a></li>
         <li><a id="sanall" href="#">Sanctions all ages</a></li>
         <li><a id="per18_24_san" href="#">Precentage of sanctions 18-24 years old</a></li>
-         </ul>
+        <h4>Crime and civil society</h4>
+        <li class="nav-header disabled"><a>Offences</a></li>
+        <li><a id="total_crime" href="#">Total crime</a></li>
+        <li><a id="vehicle_crime" href="#">Vehicle crime</a></li>
+        <li><a id="drugs" href="#">Drug crime</a></li>
+           </ul>
   </div><!--/#nav-panel -->
         <div id="narrative" class="panel panel-default">
           <a class="close-box" href="#"><img src="assets/close.png" /></a>
@@ -174,24 +188,8 @@ Search for "cpdatachange" change the column name and text as bellow
             <table class="table table-hover">
                 <tbody>
                 <tr>
-                    <td>Enrollment</td>
-                    <td class="marker-enrollment">getDisplayValue(marker.enroll_val, 'enroll_val')</td>
-                </tr>
-                <tr>
-                    <td>Allocation</td>
-                    <td class="marker-allocation">getDisplayValue(marker.alloc_cur, 'alloc_cur')</td>
-                </tr>
-                <tr>
-                    <td>Percent proficient at math</td>
-                    <td class="marker-math">getDisplayValue(marker.math_perc, 'math_perc')</td>
-                </tr>
-                <tr>
-                    <td>Percent proficient at reading</td>
-                    <td class="marker-reading">getDisplayValue(marker.reading_perc, 'reading_perc')</td>
-                </tr>
-                <tr>
-                    <td>Graduation rate</td>
-                    <td class="marker-grad">getDisplayValue(marker.grad_perc, 'grad_perc')</td>
+                    <td>Primary Service</td>
+                    <td class="marker-service">getDisplayValue(marker.primary_service, 'primary_service')</td>
                 </tr>
                 </tbody>
             </table>
